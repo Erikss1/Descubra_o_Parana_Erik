@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monte seu roteiro – Descubra o Paraná</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (opcional) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Fontes: Fraunces (títulos) e Nunito Sans (texto) -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Personalizações mínimas sobre o Bootstrap */
+    /* Variáveis CSS: troca a fonte padrão do Bootstrap e define as cores da marca (verde-mata e terra). */
+    :root { --bs-body-font-family: 'Nunito Sans', sans-serif; --verde-mata: #1f5c4a; --terra: #b5541c; }
+    /* Aplica a fonte Fraunces (serifada) em títulos e no nome do site. */
+    h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Fraunces', serif; }
+    /* Classe própria que imita o padrão "bg-*" do Bootstrap, com a cor verde da marca. */
+    .bg-mata { background-color: var(--verde-mata) !important; }
+    /* Botão personalizado na cor terra; funciona junto com a classe base "btn". */
+    .btn-terra { background-color: var(--terra); color: #fff; border: 0; }
+    /* Cor mais escura quando o mouse passa por cima do botão. */
+    .btn-terra:hover { background-color: #96440f; color: #fff; }
+  </style>
+</head>
+<!-- bg-light: fundo cinza claro em toda a página. -->
+<body class="bg-light">
+
+  <!-- ===================== NAVBAR + DROPDOWN ===================== -->
+  <!-- navbar: barra de navegação | navbar-expand-lg: menu aberto em telas grandes e "hambúrguer" nas pequenas -->
+  <!-- navbar-dark: texto claro | bg-mata: fundo verde (classe própria) | sticky-top: fica fixa no topo ao rolar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-mata sticky-top">
+    <!-- container: centraliza o conteúdo e define largura máxima responsiva. -->
+    <div class="container">
+      <!-- navbar-brand: nome/logotipo do site | fs-3: tamanho de fonte nível 3. -->
+      <a class="navbar-brand fs-3" href="index.html">Descubra o Paraná</a>
+      <!-- navbar-toggler: botão "hambúrguer" que só aparece em telas pequenas. -->
+      <!-- data-bs-toggle="collapse" + data-bs-target="#menu": ao clicar, abre/fecha o elemento com id "menu". -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+              aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- collapse navbar-collapse: área do menu que se recolhe em telas pequenas (controlada pelo botão acima). -->
+      <div class="collapse navbar-collapse" id="menu">
+        <!-- navbar-nav: lista de links do menu | ms-auto: margem esquerda automática, empurrando o menu para a direita. -->
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#destaques">Destaques</a></li>
+          <!-- dropdown: item que abre um submenu ao clicar. -->
+          <li class="nav-item dropdown">
+            <!-- dropdown-toggle: seta do menu | data-bs-toggle="dropdown": ativa o submenu via JavaScript do Bootstrap. -->
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Regiões
+            </a>
+            <!-- dropdown-menu: caixa com as opções do submenu. -->
+            <ul class="dropdown-menu">
+              <!-- dropdown-item: cada opção do submenu. -->
+              <li><a class="dropdown-item" href="index.html#destinos">Litoral</a></li>
+              <li><a class="dropdown-item" href="index.html#destinos">Campos Gerais</a></li>
+              <li><a class="dropdown-item" href="index.html#destinos">Oeste</a></li>
+              <!-- dropdown-divider: linha que separa grupos de opções. -->
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="index.html#destinos">Ver todas</a></li>
+            </ul>
+          </li>
+          <!-- nav-item / nav-link: item e link do menu | active: destaca a página atual. -->
+          <li class="nav-item"><a class="nav-link active" href="botoes.html">Monte seu roteiro</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- main: conteúdo principal | py-5: espaçamento vertical grande. -->
+  <main id="contato" class="container py-5">
+    <!-- justify-content-center: centraliza a coluna na linha. -->
+    <div class="row justify-content-center">
+      <!-- col-lg-8: 8 das 12 colunas em telas grandes. -->
+      <div class="col-lg-8">
+        <!-- TIPOGRAFIA: display-5 (título grande) | fw-bold | text-success. -->
+        <h1 class="display-5 fw-bold text-success">Monte seu roteiro</h1>
+        <!-- lead: parágrafo de destaque | mb-4: margem inferior. -->
+        <p class="lead text-secondary mb-4">Conte o que você procura e enviaremos sugestões de viagem pelo Paraná.</p>
+
+        <!-- ALERTA: alert-success: verde de confirmação | d-none: começa escondido; o JavaScript remove essa classe ao enviar. -->
+        <div id="avisoEnvio" class="alert alert-success d-none" role="alert">Recebemos seu pedido! Em breve enviaremos sugestões por e-mail.</div>
+
+        <!-- card: caixa do formulário | shadow: sombra | border-0: sem borda. -->
+        <div class="card shadow border-0">
+          <!-- card-body: conteúdo do card | p-4: espaçamento interno. -->
+          <div class="card-body p-4">
+            <!-- FORMULÁRIO: o id é usado pelo JavaScript no final da página. -->
+            <form id="formRoteiro">
+              <!-- row g-3: grid com espaço entre os campos. -->
+              <div class="row g-3">
+
+                <!-- col-md-6: dois campos lado a lado a partir de md (6 + 6 = 12); no celular cada um ocupa a linha toda. -->
+                <div class="col-md-6">
+                  <!-- form-label: rótulo (o "for" liga ao id do campo). -->
+                  <label for="nome" class="form-label">Nome</label>
+                  <!-- form-control: estilo de campo de texto | required: obrigatório. -->
+                  <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">E-mail</label>
+                  <!-- type="email": o navegador valida o formato do e-mail. -->
+                  <input type="email" class="form-control" id="email" placeholder="voce@email.com" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="regiao" class="form-label">Região de interesse</label>
+                  <!-- form-select: lista suspensa (select) com estilo Bootstrap. -->
+                  <select class="form-select" id="regiao">
+                    <option selected>Litoral</option>
+                    <option>Campos Gerais</option>
+                    <option>Oeste</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="pessoas" class="form-label">Número de pessoas</label>
+                  <!-- type="number" min="1": só aceita números, a partir de 1. -->
+                  <input type="number" class="form-control" id="pessoas" min="1" value="2">
+                </div>
+
+                <!-- Estilos de passeio: múltipla escolha -->
+                <div class="col-12">
+                  <p class="form-label mb-2">Estilos de passeio <span class="text-muted small">(escolha quantos quiser)</span></p>
+                  <!-- FLEX: d-flex flex-wrap gap-2: botões lado a lado, quebrando linha se faltar espaço. -->
+                  <div class="d-flex flex-wrap gap-2">
+        <!-- MÚLTIPLA ESCOLHA: type="checkbox" permite marcar vários. -->
+        <!-- btn-check: esconde o campo e deixa o label funcionar como botão | o label usa btn-outline-* (contorno colorido que preenche ao marcar). -->
+        <input type="checkbox" class="btn-check" name="estilo" id="estilo0" value="Ecoturismo" autocomplete="off">
+        <label class="btn btn-outline-success" for="estilo0">Ecoturismo</label>
+        <input type="checkbox" class="btn-check" name="estilo" id="estilo1" value="Gastronomia" autocomplete="off">
+        <label class="btn btn-outline-danger" for="estilo1">Gastronomia</label>
+        <input type="checkbox" class="btn-check" name="estilo" id="estilo2" value="Praia" autocomplete="off">
+        <label class="btn btn-outline-warning" for="estilo2">Praia</label>
+        <input type="checkbox" class="btn-check" name="estilo" id="estilo3" value="Cidades" autocomplete="off">
+        <label class="btn btn-outline-info" for="estilo3">Cidades</label>
+                  </div>
+                </div>
+
+                <!-- Mais opções: múltipla escolha -->
+                <div class="col-12">
+                  <p class="form-label mb-2">Mais interesses</p>
+                  <div class="d-flex flex-wrap gap-2">
+        <!-- Outro grupo de múltipla escolha (checkbox + btn-check). -->
+        <input type="checkbox" class="btn-check" name="interesse" id="interesse0" value="Aventura" autocomplete="off">
+        <label class="btn btn-outline-success" for="interesse0">Aventura</label>
+        <input type="checkbox" class="btn-check" name="interesse" id="interesse1" value="Cultura" autocomplete="off">
+        <label class="btn btn-outline-secondary" for="interesse1">Cultura</label>
+        <input type="checkbox" class="btn-check" name="interesse" id="interesse2" value="Fotografia" autocomplete="off">
+        <label class="btn btn-outline-dark" for="interesse2">Fotografia</label>
+                  </div>
+                </div>
+
+                <!-- Tamanho dos quartos -->
+                <div class="col-12">
+                  <p class="form-label mb-2">Tamanho dos quartos</p>
+                  <div class="d-flex flex-wrap align-items-center gap-2">
+        <!-- ESCOLHA ÚNICA: type="radio" com o mesmo name: só um pode ser marcado | "checked" deixa "Médio" pré-selecionado. -->
+        <input type="radio" class="btn-check" name="quarto" id="quarto0" value="Pequeno" autocomplete="off">
+        <!-- btn-sm: botão pequeno. -->
+        <label class="btn btn-outline-success btn-sm" for="quarto0">Pequeno</label>
+        <input type="radio" class="btn-check" name="quarto" id="quarto1" value="Médio" autocomplete="off" checked>
+        <label class="btn btn-outline-success" for="quarto1">Médio</label>
+        <input type="radio" class="btn-check" name="quarto" id="quarto2" value="Grande" autocomplete="off">
+        <!-- btn-lg: botão grande. -->
+        <label class="btn btn-outline-success btn-lg" for="quarto2">Grande</label>
+                  </div>
+                </div>
+
+                <!-- Tipo de hotel -->
+                <div class="col-12">
+                  <p class="form-label mb-2">Tipo de hotel</p>
+        <!-- form-check form-check-inline: opção de rádio padrão do Bootstrap, em linha (uma ao lado da outra). -->
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="hotel" id="hotel0" value="Luxo">
+          <label class="form-check-label" for="hotel0">Luxo</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="hotel" id="hotel1" value="Conforto" checked>
+          <label class="form-check-label" for="hotel1">Conforto</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="hotel" id="hotel2" value="Econômico">
+          <label class="form-check-label" for="hotel2">Econômico</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="hotel" id="hotel3" value="Pousada">
+          <label class="form-check-label" for="hotel3">Pousada</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="hotel" id="hotel4" value="Hostel">
+          <label class="form-check-label" for="hotel4">Hostel</label>
+        </div>
+                </div>
+
+                <!-- Duração da viagem -->
+                <div class="col-12">
+                  <p class="form-label mb-2">Duração da viagem</p>
+                  <!-- btn-group: junta os botões em um único bloco | role="group": acessibilidade. -->
+                  <div class="btn-group" role="group" aria-label="Duração da viagem">
+          <!-- Radio + btn-check: escolha única de duração. -->
+          <input type="radio" class="btn-check" name="dias" id="dias0" value="3 dias" autocomplete="off">
+          <label class="btn btn-outline-success" for="dias0">3 dias</label>
+          <input type="radio" class="btn-check" name="dias" id="dias1" value="7 dias" autocomplete="off" checked>
+          <label class="btn btn-outline-success" for="dias1">7 dias</label>
+          <input type="radio" class="btn-check" name="dias" id="dias2" value="15 dias" autocomplete="off">
+          <label class="btn btn-outline-success" for="dias2">15 dias</label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="msg" class="form-label">Observações</label>
+                  <!-- textarea: campo de texto com várias linhas (rows="3"). -->
+                  <textarea class="form-control" id="msg" rows="3" placeholder="Conte o que você gostaria de fazer"></textarea>
+                </div>
+                <div class="col-12">
+                  <!-- form-check + form-check-input: caixa de seleção (checkbox) padrão. -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="newsletter">
+                    <label class="form-check-label" for="newsletter">Quero receber novidades por e-mail</label>
+                  </div>
+                </div>
+                <!-- d-grid: botões ocupam a largura toda no celular | d-md-flex justify-content-md-between: lado a lado nas pontas a partir de md. -->
+                <div class="col-12 d-grid d-md-flex justify-content-md-between gap-2">
+                  <!-- btn-outline-success: botão de contorno que leva de volta ao início. -->
+                  <a href="index.html" class="btn btn-outline-success">Voltar ao início</a>
+                  <!-- type="submit": envia o formulário | btn-terra btn-lg: cor personalizada e tamanho grande. -->
+                  <button type="submit" class="btn btn-terra btn-lg">Enviar pedido</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé igual ao da página inicial. -->
+  <footer class="bg-mata text-white py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span>&copy; 2026 Descubra o Paraná – Projeto acadêmico</span>
+      <span class="small text-white-50">Feito com Bootstrap 5</span>
+    </div>
+  </footer>
+
+  <!-- JavaScript do Bootstrap: necessário para dropdown e menu hambúrguer. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Mostra o alerta de sucesso ao enviar o formulário
+    // Quando o formulário for enviado (evento "submit"), executa a função abaixo.
+    document.getElementById('formRoteiro').addEventListener('submit', function (e) {
+      // Impede o envio real (que recarregaria a página).
+      e.preventDefault();
+      // Remove "d-none" do alerta, fazendo a mensagem de sucesso aparecer.
+      document.getElementById('avisoEnvio').classList.remove('d-none');
+      // Rola suavemente até o topo para o usuário ver o alerta.
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Limpa todos os campos do formulário.
+      this.reset();
+    });
+  </script>
+</body>
+</html>
